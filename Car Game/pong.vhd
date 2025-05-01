@@ -1,3 +1,4 @@
+
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
@@ -27,7 +28,7 @@ ARCHITECTURE Behavioral OF pong IS
     SIGNAL S_red, S_green, S_blue : STD_LOGIC; --_VECTOR (3 DOWNTO 0);
     SIGNAL S_vsync : STD_LOGIC;
     SIGNAL S_pixel_row, S_pixel_col : STD_LOGIC_VECTOR (10 DOWNTO 0);
-    SIGNAL batpos : STD_LOGIC_VECTOR (10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(175, 11); -- 9 downto 0
+    SIGNAL batpos : STD_LOGIC_VECTOR (10 DOWNTO 0):= CONV_STD_LOGIC_VECTOR(200, 11); -- 9 downto 0
     SIGNAL car2pos : STD_LOGIC_VECTOR (10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(650, 11);-- 9 downto 0
     SIGNAL count : STD_LOGIC_VECTOR (20 DOWNTO 0);
     SIGNAL display : std_logic_vector (15 DOWNTO 0); -- value to be displayed
@@ -95,7 +96,7 @@ BEGIN
     BEGIN
         if rising_edge(clk_in) then
             count <= count + 1;
-            IF (btnl = '1' and count = 0 and batpos > 0) THEN
+            IF (btnl = '1' and count = 0 and batpos > 20) THEN
                 batpos <= batpos - 10;
             ELSIF (btnr = '1' and count = 0 and batpos < 305) THEN
                 batpos <= batpos + 10;
