@@ -101,7 +101,7 @@ BEGIN
                 batpos <= batpos + 10;
             END IF;
             
-            kb_row_signal <= "1101"; -- Only Row 3 low (active low)
+            kb_row_signal <= "1011"; -- Only Row 3 low (active low)
         
     
             if (KB_col(1)= '0' and count = 0 and car2pos > 500) then
