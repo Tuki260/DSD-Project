@@ -14,7 +14,8 @@ ENTITY bat_n_ball IS
         red : OUT STD_LOGIC;
         green : OUT STD_LOGIC;
         blue : OUT STD_LOGIC;
-        hit_cnt : inout STD_LOGIC_VECTOR(15 DOWNTO 0)
+        hit_cnt : inout STD_LOGIC_VECTOR(15 DOWNTO 0);
+        hit_cnt2 : inout STD_LOGIC_VECTOR(15 DOWNTO 0)
         
     );
 END bat_n_ball;
@@ -163,6 +164,7 @@ blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wal
         IF serve = '1' AND game_on = '0' THEN -- test for new serve          
             game_on <= '1';
             hit_cnt <= "0000000000000000";
+            hit_cnt2 <= "0000000000000000";
             hit_check <= '0';
             ball_speed <= CONV_STD_LOGIC_VECTOR(6, 11); 
             ball_x_motion <= CONV_STD_LOGIC_VECTOR(6, 11);
@@ -170,14 +172,10 @@ blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wal
         ELSIF ball_y <= bsize THEN -- bounce off top wall
             ball_y_motion <= ball_speed;
             hit_check <= '0'; -- set vspeed to (+ ball_speed) pixels
-        ELSIF ball_y + bsize >= 600 THEN -- if ball meets bottom wall
+        ELSIF ball_y + bsize >= 600 then -- if ball meets bottom wall
             --ball_y_motion <= (NOT ball_speed) + 1; -- set vspeed to (- ball_speed) pixels
-            --bat_w <= 40;
-            --car2_w <= 40;
-            if (ball_y + bsize >= 600) and hit_check = '0' then
-            hit_cnt     <= hit_cnt + 1;
+            if hit_check = '0' then
             hit_check   <= '1';
-            ball_y      <= conv_std_logic_vector(bsize,11);
             ball_y_motion<= ball_speed;
             end if;
             if (unsigned(ball_y) > conv_unsigned(bsize,11)) then
@@ -190,10 +188,10 @@ blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wal
         -- allow for bounce off left or right of screen
         IF ball_x + bsize >= 350 THEN -- bounce off right wall
             --ball_x_motion <= (NOT ball_speed) + 1;
-            hit_check <= '0'; -- set hspeed to (- ball_speed) pixels
+            --hit_check <= '0'; -- set hspeed to (- ball_speed) pixels
         ELSIF ball_x <= bsize THEN -- bounce off left wall
             --ball_x_motion <= ball_speed;
-            hit_check <= '0'; -- set hspeed to (+ ball_speed) pixels
+            --hit_check <= '0'; -- set hspeed to (+ ball_speed) pixels
         END IF;
         -- allow for bounce off bat
         IF (ball_x + bsize/2) >= (bat_x - bat_w) AND
@@ -213,32 +211,26 @@ blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wal
             ball2_y_motion <= (NOT CONV_STD_LOGIC_VECTOR(6, 11)) + 1; -- set vspeed to (- ball_speed) pixels          
         ELSIF ball2_y <= bsize THEN -- bounce off top wall
             ball2_y_motion <= ball2_speed;
-            hit_check <= '0'; -- set vspeed to (+ ball_speed) pixels
-        ELSIF ball2_y + bsize >= 600 THEN -- if ball meets bottom wall
+            --hit_check <= '0'; -- set vspeed to (+ ball_speed) pixels
+        ELSIF ball2_y + bsize >= 600 then -- if ball meets bottom wall
             --ball2_y_motion <= (NOT ball2_speed) + 1; -- set vspeed to (- ball_speed) pixels
-            --bat_w <= 40;
-            --car2_w <= 40;
-            --game_on <= '0'; -- and make ball disappear
-            
-           if (ball_y + bsize >= 600) and hit_check = '0' then
-            hit_cnt     <= hit_cnt + 1;
+            if hit_check2 = '0' then
             hit_check2   <= '1';
-            ball2_y      <= conv_std_logic_vector(bsize,11);
             ball2_y_motion<= ball2_speed;
             end if;
-            if (unsigned(ball2_y) > conv_unsigned(bsize,11)) then
+            if (unsigned(ball2_y) > conv_unsigned(10,11)) then
             hit_check2 <= '0';
-            ball2_speed <= conv_std_logic_vector(6 + conv_integer(unsigned(hit_cnt)), 11);
+            ball2_speed <= conv_std_logic_vector(6 + conv_integer(unsigned(hit_cnt2)), 11);
             end if;
             --game_on <= '1';
         END IF;
         -- allow for bounce off left or right of screen
         IF ball2_x + bsize >= 800 THEN -- bounce off right wall
             ball2_x_motion <= (NOT ball2_speed) + 1;
-            hit_check <= '0'; -- set hspeed to (- ball_speed) pixels
+            --hit_check <= '0'; -- set hspeed to (- ball_speed) pixels
         ELSIF ball2_x + bsize <= 4 THEN -- bounce off left wall
             ball2_x_motion <= ball2_speed;
-            hit_check <= '0'; -- set hspeed to (+ ball_speed) pixels
+            --hit_check <= '0'; -- set hspeed to (+ ball_speed) pixels
         END IF;
         -- allow for bounce off bat
         IF (ball2_x + bsize/2) >= (car2_x - car2_w) AND
@@ -257,6 +249,11 @@ blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wal
             ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
         ELSIF temp(11) = '1' THEN
             ball_y <= (OTHERS => '0');
+        ELSIF conv_integer(temp(10 DOWNTO 0)) + bsize >= 600 THEN
+        ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
+        hit_cnt <= hit_cnt + 1;
+        ball_speed <= conv_std_logic_vector(6 + conv_integer(unsigned(hit_cnt)), 11);
+        ball_y_motion <= ball_speed;
         ELSE ball_y <= temp(10 DOWNTO 0); -- 9 downto 0
         END IF;
         --ball 2
@@ -265,11 +262,16 @@ blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wal
             ball2_y <= CONV_STD_LOGIC_VECTOR(10, 11);
         ELSIF temp2(11) = '1' THEN
             ball2_y <= (OTHERS => '0');
+        ELSIF conv_integer(temp2(10 DOWNTO 0)) + bsize >= 600 THEN
+        ball2_y <= CONV_STD_LOGIC_VECTOR(10, 11);
+        hit_cnt2 <= hit_cnt2 + 1;
+        ball2_speed <= conv_std_logic_vector(6 + conv_integer(unsigned(hit_cnt2)), 11);
+        ball2_y_motion <= ball2_speed;
         ELSE ball2_y <= temp2(10 DOWNTO 0); -- 9 downto 0
         END IF;
-        -- compute next ball horizontal position
-        -- variable temp adds one more bit to calculation to fix unsigned underflow problems
-        -- when ball_x is close to zero and ball_x_motion is negative
+         --compute next ball horizontal position
+         --variable temp adds one more bit to calculation to fix unsigned underflow problems 
+         --when ball_x is close to zero and ball_x_motion is negative
 --        temp := ('0' & ball_x) + (ball_x_motion(10) & ball_x_motion);
 --        IF temp(11) = '1' THEN
 --            ball_x <= (OTHERS => '0');
