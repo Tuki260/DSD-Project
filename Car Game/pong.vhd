@@ -31,11 +31,13 @@ ARCHITECTURE Behavioral OF pong IS
     SIGNAL batpos : STD_LOGIC_VECTOR (10 DOWNTO 0):= CONV_STD_LOGIC_VECTOR(200, 11); -- 9 downto 0
     SIGNAL car2pos : STD_LOGIC_VECTOR (10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(650, 11);-- 9 downto 0
     SIGNAL count : STD_LOGIC_VECTOR (20 DOWNTO 0);
-    SIGNAL display : std_logic_vector (15 DOWNTO 0); -- value to be displayed
+    SIGNAL display : std_logic_vector (15 DOWNTO 0);
+    SIGNAL display2 : std_logic_vector (15 DOWNTO 0); -- value to be displayed
     SIGNAL led_mpx : STD_LOGIC_VECTOR (2 DOWNTO 0); -- 7-seg multiplexing clock
     SIGNAL kb_row_signal : STD_LOGIC_VECTOR(4 DOWNTO 1);
     SIGNAL kb_col_signal : STD_LOGIC_VECTOR(4 DOWNTO 1); 
     SIGNAL kp_value : std_logic_vector (3 DOWNTO 0);
+    signal data_sel : std_logic_vector(15 downto 0);
     
     --component for keypad
 --    	COMPONENT keypad IS
@@ -58,7 +60,8 @@ ARCHITECTURE Behavioral OF pong IS
             red : OUT STD_LOGIC;
             green : OUT STD_LOGIC;
             blue : OUT STD_LOGIC;
-            hit_cnt : STD_LOGIC_VECTOR(15 DOWNTO 0)
+            hit_cnt : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+            hit_cnt2 : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0)
         );
     END COMPONENT;
     COMPONENT vga_sync IS
@@ -86,6 +89,7 @@ ARCHITECTURE Behavioral OF pong IS
         PORT (
             dig : IN STD_LOGIC_VECTOR (2 DOWNTO 0);
             data : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+            data2 : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
             anode : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
             seg : OUT STD_LOGIC_VECTOR (6 DOWNTO 0)
         );
@@ -128,6 +132,7 @@ BEGIN
         green => S_green, 
         blue => S_blue,
         hit_cnt => display,
+        hit_cnt2 => display2,
         car2_x => car2pos
     );
     
@@ -153,9 +158,18 @@ BEGIN
       clk_in1 => clk_in,
       clk_out1 => pxl_clk
     );
+--    displaychoose : process(led_mpx, display, display2) is
+--    begin
+--        if conv_integer(unsigned(led_mpx)) < 4 then
+--            data_sel <= display;
+--        else
+--            data_sel <= display2;
+--        end if;
+--    end process;
+    
     led1 : leddec16
     PORT MAP(
-      dig => led_mpx, data => display, 
+      dig => led_mpx, data => display, data2 => display2, 
       anode => SEG7_anode, seg => SEG7_seg
     );
 --    kp : keypad
