@@ -237,14 +237,12 @@ BEGIN
              (ball_y - bsize/2) <= (bat_y + bat_h) THEN
                 --ball_y_motion <= (NOT ball_speed) + 1;
                 --bat_w <= bat_w - 1; -- set vspeed to (- ball_speed) pixels
-                if hit_cnt > 10 then
+                if hit_cnt > - 5 then
                 hit_cnt <= hit_cnt - 5;
                 ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
-                ball_x <= CONV_STD_LOGIC_VECTOR(600, 11);
                 else
                 hit_cnt <= (others => '0');
                 ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
-                ball_x <= CONV_STD_LOGIC_VECTOR(600, 11);
                 end if;
                --game_on <= '0';
         END IF;
@@ -275,14 +273,12 @@ BEGIN
          (ball2_x - bsize/2) <= (car2_x + car2_w) AND
              (ball2_y + bsize/2) >= (car2_y - car2_h) AND
              (ball2_y - bsize/2) <= (car2_y + car2_h) THEN
-                if hit_cnt2 > 10 then
+                if hit_cnt2 > 5 then
                 hit_cnt2 <= hit_cnt2 - 5;
-                ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
-                ball_x <= CONV_STD_LOGIC_VECTOR(200, 11);
+                ball2_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 else
                 hit_cnt2 <= (others => '0');
-                ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
-                ball_x <= CONV_STD_LOGIC_VECTOR(200, 11);
+                ball2_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 end if;
                --game_on <= '0';
         END IF;     
