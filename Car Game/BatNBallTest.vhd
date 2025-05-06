@@ -57,7 +57,7 @@ ARCHITECTURE Behavioral OF bat_n_ball IS
     signal wall_fill : std_logic := '0';
     signal wall_bottom : std_logic := '0';    
 BEGIN
-red   <= ball_on AND NOT wall_left_on AND NOT wall_right_on AND NOT wall_fill AND ball2_on;
+red   <= ball_on AND NOT wall_left_on AND NOT wall_right_on AND NOT wall_fill AND ball2_on AND testball_on;
 green <= bat_on or car2_on or wall_bottom; 
 blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wall_left_on AND NOT wall_right_on AND NOT wall_fill;
     -- process to draw round ball
