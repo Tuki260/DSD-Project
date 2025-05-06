@@ -154,16 +154,24 @@ blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wal
     -- set bat_on if current pixel address is covered by bat position
     batdraw : PROCESS (bat_x, pixel_row, pixel_col) IS
         VARIABLE vx, vy : STD_LOGIC_VECTOR (10 DOWNTO 0); -- 9 downto 0
-    BEGIN
-        IF ((pixel_col >= bat_x - bat_w) OR (bat_x <= bat_w)) AND
-         pixel_col <= bat_x + bat_w AND
-             pixel_row >= bat_y - bat_h AND
-             pixel_row <= bat_y + bat_h THEN
-                bat_on <= '1';
+   BEGIN
+        IF pixel_col <= bat_x THEN -- vx = |ball_x - pixel_col|
+            vx := bat_x - pixel_col;
+        ELSE
+            vx := pixel_col - bat_x;
+        END IF;
+        IF pixel_row <= bat_y THEN -- vy = |ball_y - pixel_row|
+            vy := bat_y - pixel_row;
+        ELSE
+            vy := pixel_row - bat_y;
+        END IF;
+        IF ((vx * vx) + (vy * vy)) < (bat_w * bat_w) THEN -- test if radial distance < bsize
+            bat_on <= game_on;
         ELSE
             bat_on <= '0';
         END IF;
     END PROCESS;
+          
     
     
     car2draw : PROCESS (car2_x, pixel_row, pixel_col) IS
