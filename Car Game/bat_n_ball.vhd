@@ -24,18 +24,20 @@ ARCHITECTURE Behavioral OF bat_n_ball IS
     signal hit_check: std_logic := '0';
     signal hit_check2: std_logic := '0';
     CONSTANT bsize : INTEGER := 16; -- ball size in pixels
-    CONSTANT testballsize: INTEGER := 30;
+    CONSTANT wheelsize: INTEGER := 10;
     signal bat_w : INTEGER := 10; -- bat width in pixels
     CONSTANT bat_h : INTEGER := 50; -- bat height in pixels
     signal car2_w : INTEGER := 10;
     CONSTANT car2_h : INTEGER := 50;
     -- distance ball moves each frame
+    signal lfsr : std_logic_vector(10 DOWNTO 0) := (others => '1');
+    signal lfsr2 : std_logic_vector(10 DOWNTO 0) := (others => '1');
     signal counter : STD_LOGIC_VECTOR (35 DOWNTO 0);
     signal randomx : STD_LOGIC_VECTOR (10 DOWNTO 0);
     signal ball_speed : STD_LOGIC_VECTOR (10 DOWNTO 0);
     signal ball2_speed : STD_LOGIC_VECTOR (10 DOWNTO 0);
     SIGNAL ball_on : STD_LOGIC;
-    SIGNAL testball_on: STD_LOGIC := '0';
+    SIGNAL wheel_on: STD_LOGIC := '0';
     SIGNAL ball2_on : STD_LOGIC; -- indicates whether ball is at current pixel position
     SIGNAL bat_on : STD_LOGIC; -- indicates whether bat at over current pixel position
     signal car2_on : STD_LOGIC;
@@ -45,8 +47,8 @@ ARCHITECTURE Behavioral OF bat_n_ball IS
     SIGNAL ball_y : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(0, 11);
     SIGNAL ball2_x : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(650, 11);
     SIGNAL ball2_y : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(10, 11);
-    SIGNAL testball_x: STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(150, 11);
-    SIGNAL testball_y: STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(350, 11);
+    SIGNAL wheel_x: STD_LOGIC_VECTOR(10 DOWNTO 0);
+    SIGNAL wheel_y: STD_LOGIC_VECTOR(10 DOWNTO 0);
     -- bat vertical position
     CONSTANT bat_y : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(550, 11);
     CONSTANT car2_y : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(550, 11);
@@ -59,9 +61,9 @@ ARCHITECTURE Behavioral OF bat_n_ball IS
     signal wall_bottom : std_logic := '0';    
 BEGIN
 
-red   <= ball_on AND NOT wall_left_on AND NOT wall_right_on AND NOT wall_fill AND ball2_on AND testball_on;
-green <= bat_on or car2_on or wall_bottom; 
-blue  <= NOT ball2_on AND NOT ball_on AND NOT testball_on AND NOT bat_on AND NOT car2_on AND NOT wall_left_on AND NOT wall_right_on AND NOT wall_fill;
+red   <= ball_on AND NOT wall_left_on AND NOT wall_right_on AND NOT wall_fill AND ball2_on;
+green <= bat_on or car2_on or wall_bottom or wheel_on;
+blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wall_left_on AND NOT wall_right_on AND NOT wall_fill;
     -- process to draw round ball
     -- set ball_on if current pixel address is covered by ball position
     balldraw : PROCESS (ball_x, ball_y, pixel_row, pixel_col) IS
@@ -154,31 +156,35 @@ BEGIN
              vy := pixel_row - bat_y;
          END IF;
          IF ((vx * vx) + (vy * vy)) < (bat_w * bat_w) THEN -- test if radial distance < bsize
-             bat_on <= game_on;
+             bat_on <= '1';
         ELSE
             bat_on <= '0';
         END IF;
+        IF bat_on <= '1' THEN
+                 wheel_x <= bat_x + 5;
+                 wheel_y <= bat_y + 8;
+        END IF;
     END PROCESS;
     
-    testballdraw : PROCESS (testball_x, testball_y, pixel_row, pixel_col) IS
-        VARIABLE testx, testy : STD_LOGIC_VECTOR (10 DOWNTO 0); -- 9 downto 0
+     wheeldraw: PROCESS( wheel_x, wheel_y, pixel_row, pixel_col) is
+         VARIABLE vx, vy : STD_LOGIC_VECTOR (10 DOWNTO 0); -- 9 downto 0
     BEGIN
-        IF pixel_col <= testball_x THEN -- vx = |ball_x - pixel_col|
-            testx := testball_x - pixel_col;
-        ELSE
-            testx := pixel_col - testball_x;
-        END IF;
-        IF pixel_row <= testball_y THEN -- vy = |ball_y - pixel_row|
-            testy := testball_y - pixel_row;
-        ELSE
-            testy := pixel_row - testball_y;
-        END IF;
-        IF ((testx * testx) + (testy * testy)) < (testballsize * testballsize) THEN -- test if radial distance < bsize
-            testball_on <= '0';
-        ELSE
-            testball_on <= '0';
-        END IF;
-    END PROCESS;
+         IF pixel_col <= wheel_x THEN -- vx = |ball_x - pixel_col|
+             vx := wheel_x - pixel_col;
+         ELSE
+             vx := pixel_col - wheel_x;
+         END IF;
+         IF pixel_row <= wheel_y THEN -- vy = |ball_y - pixel_row|
+             vy := wheel_y - pixel_row;
+         ELSE
+             vy := pixel_row - wheel_y;
+         END IF;
+         IF ((vx * vx) + (vy * vy)) < (wheelsize * wheelsize) THEN -- test if radial distance < bsize
+             wheel_on <= '1';
+         ELSE
+             wheel_on <= '0';
+         END IF;         
+    end process;
     
     car2draw : PROCESS (car2_x, pixel_row, pixel_col) IS
         VARIABLE vx, vy : STD_LOGIC_VECTOR (10 DOWNTO 0); -- 9 downto 0
@@ -198,8 +204,15 @@ BEGIN
     mball : PROCESS
         VARIABLE temp : STD_LOGIC_VECTOR (11 DOWNTO 0);
         VARIABLE temp2 : STD_LOGIC_VECTOR (11 DOWNTO 0);
+        variable rnd_int : integer;
+        variable rnd_int2 : integer;
+        
     BEGIN
         WAIT UNTIL rising_edge(v_sync);
+        lfsr <= lfsr(9 DOWNTO 0) & (lfsr(10) xor lfsr(8));
+        lfsr2 <= lfsr2(9 DOWNTO 0) & (lfsr2(10) xor lfsr2(8));
+        rnd_int := conv_integer(unsigned(lfsr(8 DOWNTO 0))) mod 301;
+        rnd_int2 := conv_integer(unsigned(lfsr2(8 DOWNTO 0))) mod 326;
         IF serve = '1' AND game_on = '0' THEN -- test for new serve 
             counter <= (OTHERS =>'0');
         else
@@ -237,11 +250,11 @@ BEGIN
              (ball_y - bsize/2) <= (bat_y + bat_h) THEN
                 --ball_y_motion <= (NOT ball_speed) + 1;
                 --bat_w <= bat_w - 1; -- set vspeed to (- ball_speed) pixels
-                if hit_cnt > - 5 then
-                hit_cnt <= hit_cnt - 5;
+                if unsigned(hit_cnt) > conv_unsigned(5, 16) then
+                hit_cnt <= conv_std_logic_vector((unsigned(hit_cnt) - 5), 16);
                 ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 else
-                hit_cnt <= (others => '0');
+                hit_cnt <= (others=>'0');
                 ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 end if;
                --game_on <= '0';
@@ -273,11 +286,11 @@ BEGIN
          (ball2_x - bsize/2) <= (car2_x + car2_w) AND
              (ball2_y + bsize/2) >= (car2_y - car2_h) AND
              (ball2_y - bsize/2) <= (car2_y + car2_h) THEN
-                if hit_cnt2 > 5 then
-                hit_cnt2 <= hit_cnt2 - 5;
+                if unsigned(hit_cnt2) > conv_unsigned(5, 16) then
+                hit_cnt2 <= conv_std_logic_vector((unsigned(hit_cnt2) - 5), 16);
                 ball2_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 else
-                hit_cnt2 <= (others => '0');
+                hit_cnt2 <= (others=>'0');
                 ball2_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 end if;
                --game_on <= '0';
@@ -289,7 +302,7 @@ BEGIN
         ELSIF temp(11) = '1' THEN
             ball_y <= (OTHERS => '0');
         ELSIF conv_integer(temp(10 DOWNTO 0)) + bsize >= 600 THEN
-        ball_x <= CONV_STD_LOGIC_VECTOR(( CONV_INTEGER( UNSIGNED(counter(10 DOWNTO 0)) ) MOD 301 ), 11);
+        ball_x <= std_logic_vector(conv_unsigned((rnd_int), 11));
         ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
         hit_cnt <= hit_cnt + 1;
         if hit_cnt = 100 then
@@ -306,7 +319,7 @@ BEGIN
         ELSIF temp2(11) = '1' THEN
             ball2_y <= (OTHERS => '0');
         ELSIF conv_integer(temp2(10 DOWNTO 0)) + bsize >= 600 THEN
-        ball2_x <= CONV_STD_LOGIC_VECTOR(( CONV_INTEGER( UNSIGNED(counter(10 DOWNTO 0)) ) MOD 326 )+ 450, 11);
+        ball2_x <= std_logic_vector(conv_unsigned(rnd_int2 + 450, 11));
         ball2_y <= CONV_STD_LOGIC_VECTOR(10, 11);
         hit_cnt2 <= hit_cnt2 + 1;
         if hit_cnt2 = 100 then
