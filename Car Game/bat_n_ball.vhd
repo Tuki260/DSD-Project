@@ -68,9 +68,9 @@ ARCHITECTURE Behavioral OF bat_n_ball IS
     signal wall_bottom : std_logic := '0';    
 BEGIN
 
-red   <= ball_on AND NOT wall_left_on AND NOT wall_right_on AND NOT wall_fill AND ball2_on AND car2_on;
-green <= bat_on or wheel_on or car2wheel_on;
-blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wall_left_on AND NOT wall_right_on AND NOT wall_fill;
+red   <= car2_on or car2wheel_on;
+green <= bat_on or wheel_on;
+blue  <= not (ball_on or ball2_on or bat_on or car2_on or wall_left_on or wall_right_on or wall_fill or wall_bottom);
     -- process to draw round ball
     -- set ball_on if current pixel address is covered by ball position
     balldraw : PROCESS (ball_x, ball_y, pixel_row, pixel_col) IS
