@@ -155,8 +155,8 @@ blue  <= NOT ball2_on AND NOT ball_on AND NOT bat_on AND NOT car2_on AND NOT wal
             bat_on <= '0';
         END IF;            
             IF bat_on <= '1' THEN
-                wheel_x := vx + 5;
-                wheel_y := vy + 8;
+                wheel_x := bat_x + 5 AND bat_x - 5;
+                wheel_y := bat_y + 8 AND bat_y -5;
     END IF;
     END PROCESS;
 
