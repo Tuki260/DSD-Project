@@ -77,6 +77,8 @@
 
 * Gameplay gifs and images here
 
+## Difficulties and Itterations
+
 ## Contributions
 
 
