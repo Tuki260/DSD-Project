@@ -1,2 +1,2 @@
-# DSD-Project
-Two Player Racing Game in VHDL
+# Final Project: Two Player Racing Game
+
