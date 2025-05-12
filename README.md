@@ -1,6 +1,6 @@
 # Final Project: Two Player Racing Game
 
-![Final product](pictures/IMG_1161.jpeg)
+![Final product](Pictures/IMG_1161.jpeg)
 
 ## Expected Behaviors
 
