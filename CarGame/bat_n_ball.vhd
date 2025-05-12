@@ -382,7 +382,7 @@ END PROCESS;
              (ball_y - bsize/2) <= (bat_y + bat_h) THEN
                 --ball_y_motion <= (NOT ball_speed) + 1;
                 --bat_w <= bat_w - 1; -- set vspeed to (- ball_speed) pixels
-                if unsigned(hit_cnt) > conv_unsigned(5, 16) then
+                if unsigned(hit_cnt) > conv_unsigned(2, 16) then
                 hit_cnt <= conv_std_logic_vector((unsigned(hit_cnt) - 2), 16);
                 ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 else
@@ -418,7 +418,7 @@ END PROCESS;
          (ball2_x - bsize/2) <= (car2_x + car2_w) AND
              (ball2_y + bsize/2) >= (car2_y - car2_h) AND
              (ball2_y - bsize/2) <= (car2_y + car2_h) THEN
-                if unsigned(hit_cnt2) > conv_unsigned(5, 16) then
+                if unsigned(hit_cnt2) > conv_unsigned(2, 16) then
                 hit_cnt2 <= conv_std_logic_vector((unsigned(hit_cnt2) - 2), 16);
                 ball2_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 else
