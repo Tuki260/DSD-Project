@@ -45,7 +45,7 @@ ARCHITECTURE Behavioral OF bat_n_ball IS
     SIGNAL game_on : STD_LOGIC := '0'; -- indicates whether ball is in play
     -- current ball position - intitialized to center of screen
     SIGNAL ball_x : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(200, 11);
-    SIGNAL ball_y : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(0, 11);
+    SIGNAL ball_y : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(10, 11);
     SIGNAL ball2_x : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(650, 11);
     SIGNAL ball2_y : STD_LOGIC_VECTOR(10 DOWNTO 0) := CONV_STD_LOGIC_VECTOR(10, 11);
     signal wheel1_x, wheel1_y : STD_LOGIC_VECTOR(10 DOWNTO 0);
