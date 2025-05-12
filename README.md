@@ -8,8 +8,7 @@
  * The user should be able to move left and right controlling an individual car
  * There should be random falling obstacles that the user needs to avoid with increasing difficulty
  * There should be a score counter for each player
- * There should be a penalty if you hit an obstacle
- * There should be a win scenario
+ * There should be a penalty if you hit an obstacle There should be a win scenario
  
 ## Necessary Equipment
 
