@@ -3,7 +3,7 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-ENTITY bat_n_ball IS
+ENTITY car_n_obstacles IS
     PORT (
         v_sync : IN STD_LOGIC;
         pixel_row : IN STD_LOGIC_VECTOR(10 DOWNTO 0);
@@ -18,9 +18,9 @@ ENTITY bat_n_ball IS
         hit_cnt2 : inout STD_LOGIC_VECTOR(15 DOWNTO 0)
         
     );
-END bat_n_ball;
+END car_n_obstacles;
 
-ARCHITECTURE Behavioral OF bat_n_ball IS
+ARCHITECTURE Behavioral OF car_n_obstacles IS
     signal hit_check: std_logic := '0';
     signal hit_check2: std_logic := '0';
     CONSTANT bsize : INTEGER := 16; -- ball size in pixels
@@ -382,7 +382,7 @@ END PROCESS;
              (ball_y - bsize/2) <= (bat_y + bat_h) THEN
                 --ball_y_motion <= (NOT ball_speed) + 1;
                 --bat_w <= bat_w - 1; -- set vspeed to (- ball_speed) pixels
-                if unsigned(hit_cnt) > conv_unsigned(2, 16) then
+                if unsigned(hit_cnt) > conv_unsigned(5, 16) then
                 hit_cnt <= conv_std_logic_vector((unsigned(hit_cnt) - 2), 16);
                 ball_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 else
@@ -418,7 +418,7 @@ END PROCESS;
          (ball2_x - bsize/2) <= (car2_x + car2_w) AND
              (ball2_y + bsize/2) >= (car2_y - car2_h) AND
              (ball2_y - bsize/2) <= (car2_y + car2_h) THEN
-                if unsigned(hit_cnt2) > conv_unsigned(2, 16) then
+                if unsigned(hit_cnt2) > conv_unsigned(5, 16) then
                 hit_cnt2 <= conv_std_logic_vector((unsigned(hit_cnt2) - 2), 16);
                 ball2_y <= CONV_STD_LOGIC_VECTOR(10, 11);
                 else
