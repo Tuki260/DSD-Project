@@ -4,7 +4,7 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-ENTITY pong IS
+ENTITY cardrive IS
     PORT (
         clk_in : IN STD_LOGIC; -- system clock
         VGA_red : OUT STD_LOGIC_VECTOR (3 DOWNTO 0); -- VGA outputs
@@ -20,9 +20,9 @@ ENTITY pong IS
         SEG7_anode : OUT STD_LOGIC_VECTOR (7 DOWNTO 0); -- anodes of four 7-seg displays
         SEG7_seg : OUT STD_LOGIC_VECTOR (6 DOWNTO 0)
     ); 
-END pong;
+END cardrive;
 
-ARCHITECTURE Behavioral OF pong IS
+ARCHITECTURE Behavioral OF cardrive IS
     SIGNAL pxl_clk : STD_LOGIC := '0'; -- 25 MHz clock to VGA sync module
     -- internal signals to connect modules
     SIGNAL S_red, S_green, S_blue : STD_LOGIC; --_VECTOR (3 DOWNTO 0);
@@ -49,7 +49,7 @@ ARCHITECTURE Behavioral OF pong IS
 --		);
 --    end component;
     
-    COMPONENT bat_n_ball IS
+    COMPONENT car_n_obstacles IS
         PORT (
             v_sync : IN STD_LOGIC;
             pixel_row : IN STD_LOGIC_VECTOR(10 DOWNTO 0);
@@ -121,7 +121,7 @@ BEGIN
     KB_row <= kb_row_signal;
     led_mpx <= count(19 DOWNTO 17); -- 7-seg multiplexing clock 
        
-    add_bb : bat_n_ball
+    add_bb : car_n_obstacles
     PORT MAP(--instantiate bat and ball component
         v_sync => S_vsync, 
         pixel_row => S_pixel_row, 
@@ -158,22 +158,12 @@ BEGIN
       clk_in1 => clk_in,
       clk_out1 => pxl_clk
     );
---    displaychoose : process(led_mpx, display, display2) is
---    begin
---        if conv_integer(unsigned(led_mpx)) < 4 then
---            data_sel <= display;
---        else
---            data_sel <= display2;
---        end if;
---    end process;
+
     
     led1 : leddec16
     PORT MAP(
       dig => led_mpx, data => display, data2 => display2, 
       anode => SEG7_anode, seg => SEG7_seg
     );
---    kp : keypad
---    PORT MAP(
---      row => kb_row, col => kb_col, value => kp_value
---    );
+
 END Behavioral;
