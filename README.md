@@ -21,10 +21,15 @@
 
 ## Code Modules Overview
 
+* The **_[leddec16.vhd](CarGame/leddec16.vhd)_** controls the 7 segment display and what drives each display
+  * The changes made to this file revolve around seperating segments 0-3 and 4-7
+  * We used two 16 bit logic vectors data and data2 to determine what score to show and where
+  * Dig controls what digit to display
+  * Seg converts the given digit to its corresponding hex value 
+
 * The **_[clk_wiz_0](CarGame/clk_wiz_0.vhd)_** and **_[clk_wiz_0_clk_wiz](CarGame/clk_wiz_0_clk_wiz.vhd)_** modules were taken from the [given code for Lab 6](https://github.com/byett/dsd/tree/CPE487-Spring2025/Nexys-A7/Lab-6) and left unmodified.
   * These modules control the clock processes of the Nexys A7 board.
  
-
 * The **_[vga_sync](CarGame/vga_sync.vhd)_** module (also given and unmodified) uses a clock to drive horizontal and vertical counters h_cnt and v_cnt, respectively.
   * These counters are then used to generate the various timing signals.
   * The vertical and horizontal sync waveforms, vsync and hsync, will go directly to the VGA display with the column and row address, pixel_col and pixel_row, of the current pixel being displayed.
