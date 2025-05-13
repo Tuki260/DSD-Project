@@ -158,11 +158,11 @@ Processes:
 
 ## Input/Output Description
 
-BTNL press -> Car 1 moves left
-BTNR press -> Car 1 moves right
-BTNC press -> Game begins
-PMOD KYPD 6 press -> Car 2 moves left
-PMOD KYPD 3 press -> Car 2 moves right
+* BTNL press -> Car 1 moves left
+* BTNR press -> Car 1 moves right
+* BTNC press -> Game begins
+* PMOD KYPD 6 press -> Car 2 moves left
+* PMOD KYPD 3 press -> Car 2 moves right
 
 ## How to make this work in vivado
 
