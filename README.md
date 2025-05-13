@@ -171,7 +171,7 @@ Processes:
 
 ## Gameplay Summary
 
-![Gameplay Demo](Pictures/IMG_1185-ezgif.com-optimize.gif)
+![Gameplay Demo](Pictures/ConstantCrash.gif)
 
 
 
