@@ -78,7 +78,8 @@
 ### Cardrive.xdc
 
 * This constraint file was edited to incorporate the use of the key pad.
-* To incorporate the key pad, we directly copied in the appropriate peroperities and pins from the hex calculator lab. [hexcalc.xdc](https://github.com/byett/dsd/blob/CPE487-Spring2025/Nexys-A7/Lab-4/hexcalc.xdc)
+* To incorporate the key pad, we directly copied in the appropriate peroperities and pins from the hex calculator lab. [hexcalc.xdc](https://github.com/byett/dsd/blob/9a72b6299abd0093ced6b22adff2ac72ab6343f5/Nexys-A7/Lab-4/hexcalc.xdc#L17-L24)
+
  
 
 ### car_n_obstacles.vhd
