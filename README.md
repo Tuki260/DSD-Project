@@ -189,10 +189,12 @@ Anthony:
 * Implementing keypad
 * Added to README
 
-Jaelin: *Needs Editing*
+Jaelin: 
 
-* Wheels
+* Wheel Boundaries
+* Wheel Dimensions/Graphics
 * Colors
+* Debugging/Creating Alternate "Test" Codes to implement new features
 
 Salvatore: *Needs Editing*
 
