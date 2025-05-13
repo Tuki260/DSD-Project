@@ -135,11 +135,12 @@ Processes:
 * This logic for the first ball was replicated for the second ball using ball2 variables with hit_cnt_2 and hit_check2.
 * Temp stuff LINES 431+ *NEEDS EDITING*
 
-
 ### leddec16.vhd
 
-* Initialized data2 to take the values for car2 similar to how data corresponds to the first car.
-
+* Added data2 into entity leddec16 for car2.
+* In addition to data4 <= data, we set data4 <= data2 aswell when dig was 100 - 111.
+* We also uncommented the bottom 4 lines of code under anode to incorporate the left 4 displays on the 7-segment display.
+* This code now displays player 2's score on the left and player 1's score on the right.
 
 ## Heirarchy of the code:
 
