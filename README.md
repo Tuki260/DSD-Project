@@ -61,7 +61,19 @@
 
 ### Cardrive.vhd
 
-* put changes and images here
+* Changed entity name from 'pong' to 'cardrive.'
+* Added KB_row OUT and kb_col INOUT to entity cardrive.
+* Initialized car2pos to CONV_STD_LOGIC_VECTOR(650, 11) to set it on the right side of the barrier for player 2.
+* Initialized display2 for the score to display.
+* Initialized kb_row_signal, kb_col_signal, kp_value, and data_sel for the keypad functions.
+* Changed component name from 'bat_n_ball' to 'car_n_obstacles.'
+* Added car2_x IN and hit_cnt2 INOUT to component car_n_obstacles.
+* Added data2 to component leddec16.
+* In the pos process, changed the limits of where the first car can go from 0,800 to 20,305.
+* In the pos process, added similar logic for car2pos but changed the limit from where car2 can go to 500,775. We also added logic to incorporate hitting the correct buttons by setting kb_row_signal <= "1011" and in the if statements, also check to see if KB_col(1) = '0' and KB_col(2)= '0.' This allows for buttons 6 and 3 to be pressed as the left and right movement keys.
+* Set kb_row <= kb_row_signal to ensure that kb_row was "1011', which corresponds to row 3 on the keypad.
+* In the portmap of car_n_obstacles, set hit_cnt2 => display2 and car2_x => car2pos.
+* In the portmap of leddec16, set data => display and data2 => display2.
 
 ### Cardrive.xdc
 
@@ -70,6 +82,10 @@
 ### car_n_obstacles.vhd
 
 * put all our processes and modifications with screenshots here
+
+### leddec16.vhd
+
+* Initialized data2 to take the values for car2 similar to how data corresponds to the first car.
 
 ## Input/Output Description
 
