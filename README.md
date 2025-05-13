@@ -64,15 +64,15 @@
 * Changed entity name from 'pong' to 'cardrive.'
 * Added KB_row OUT and kb_col INOUT to entity cardrive.
 * Initialized car2pos to CONV_STD_LOGIC_VECTOR(650, 11) to set it on the right side of the barrier for player 2.
-* Initialized display2 for the score to display.
+* Initialized display and display2 for the scores of each player to display.
 * Initialized kb_row_signal, kb_col_signal, kp_value, and data_sel for the keypad functions.
 * Changed component name from 'bat_n_ball' to 'car_n_obstacles.'
-* Added car2_x IN and hit_cnt2 INOUT to component car_n_obstacles.
-* Added data2 to component leddec16.
+* Added car2_x IN, hit_cnt INOUT and hit_cnt2 INOUT to component car_n_obstacles.
+* Added data and data2 to component leddec16.
 * In the pos process, changed the limits of where the first car can go from 0,800 to 20,305.
 * In the pos process, added similar logic for car2pos but changed the limit from where car2 can go to 500,775. We also added logic to incorporate hitting the correct buttons by setting kb_row_signal <= "1011" and in the if statements, also check to see if KB_col(1) = '0' and KB_col(2)= '0.' This allows for buttons 6 and 3 to be pressed as the left and right movement keys.
 * Set kb_row <= kb_row_signal to ensure that kb_row was "1011', which corresponds to row 3 on the keypad.
-* In the portmap of car_n_obstacles, set hit_cnt2 => display2 and car2_x => car2pos.
+* In the portmap of car_n_obstacles, hit_cnt => display, set hit_cnt2 => display2 and car2_x => car2pos.
 * In the portmap of leddec16, set data => display and data2 => display2.
 
 ### Cardrive.xdc
@@ -81,7 +81,22 @@
 
 ### car_n_obstacles.vhd
 
-* put all our processes and modifications with screenshots here
+* Changed entity name from 'bat_n_ball' to 'car_n_obstacles.'
+* Added car2_x IN and hit_cnt2 INOUT to entity car_n_obstacles.
+* Initialized hit_check2 and set it equal to '0.'
+* Set constant bsize to 16 instead of 8 to make the game harder (the ball will be bigger and thus harder to avoid).
+* Initlized constant wheelsize and set it equal to 10.
+* Initialized signal car2_w and set it equal to 20 and constant car2_h and set it equal to 35. These are the same perameters for the first car.
+* Initialized lfsr and lfsr2 and set the whole 11 bit vector to '1'.
+* Initialized signals counter, randomx, ball2_speed, wheel_on ='0', car2wheel_on ='0', ball2_on, and car2_on.
+* Modified ball_x and ball_y from 400,11 and 300,11 to 200,11 and 10,11 
+* Initialized ball2_x and set it to 650,11 and ball2_y and set it to 10,11.
+* Initialized wheel1_x , wheel1_y and did the same for the other 3 wheels.
+* Initialized car2wheel1_x, car2wheel1_y and did the same for the other 3 wheels.
+* Initialized car2_y and set it to 550, 11.
+* Initialized ball2_x_motion and ball2_y_motion. Note: Ball2_x_motion was not used in this code.
+* Initialized wall_right_on, wall_left_on, wall_fill, wall_bottom and set them all equal to '0'.
+* 
 
 ### leddec16.vhd
 
