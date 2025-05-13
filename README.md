@@ -151,7 +151,10 @@ Processes:
 
 ## How to make this work in vivado
 
-![image](https://github.com/user-attachments/assets/9f820a84-2ff5-48f0-8c97-1566e6c0d060)
+### Hardware:
+![image](https://github.com/user-attachments/assets/e23a38be-de99-4721-8a1f-c4ad113ad660)
+* On the Nexys A7 board, connect the VGA port (Red) to the monitor you want to display the game on. Connect the USB port (Blue) to your computer that is running the code. Turn the power on by hitting the power switch (Purple). 
+
 
 ## Gameplay Summary
 
