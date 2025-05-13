@@ -175,5 +175,19 @@ Processes:
 
 ## Contributions
 
+Note: For almost every feature / mechanic, we worked on it as a group instead of each doing each thing individually. We sorted the contributions below based on who's ideas and inputs worked the best for each fature.
+
+Anthony:
+* Car graphics and dimensions (not wheels)
+* Car and ball boundaries
+* Graphics of the boundaries
+* Implementing keypad
+* Added to README
+
+Jaelin:
+
+Salvatore:
+
+
 
 
