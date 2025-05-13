@@ -184,9 +184,14 @@ Anthony:
 * Implementing keypad
 * Added to README
 
-Jaelin:
+Jaelin: *Needs Editing*
 
-Salvatore:
+* Wheels
+* Colors
+
+Salvatore: *Needs Editing*
+
+* 
 
 
 
