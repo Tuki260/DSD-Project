@@ -77,7 +77,9 @@
 
 ### Cardrive.xdc
 
-* Pin screenshot and explanation
+* This constraint file was edited to incorporate the use of the key pad.
+* To incorporate the key pad, we directly copied in the appropriate peroperities and pins from the hex calculator lab. [hexcalc.xdc](https://github.com/byett/dsd/blob/CPE487-Spring2025/Nexys-A7/Lab-4/hexcalc.xdc)
+ 
 
 ### car_n_obstacles.vhd
 
@@ -140,7 +142,7 @@ Processes:
 * Added data2 into entity leddec16 for car2.
 * In addition to data4 <= data, we set data4 <= data2 aswell when dig was 100 - 111.
 * We also uncommented the bottom 4 lines of code under anode to incorporate the left 4 displays on the 7-segment display.
-* This code now displays player 2's score on the left and player 1's score on the right.
+* This code now displays player 2's score on the left and player 1's score on the right four segments of the 7-segment display.
 
 ## Heirarchy of the code:
 
