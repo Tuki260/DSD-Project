@@ -5,10 +5,12 @@
 ## Expected Behaviors
 
 * The goal of our project was to create a top down racing game where users dodge obstacles
-  * The user should be able to move left and right controlling an individual car
+  * One user should be able to move left and right controlling an individual car using the Nexys Board controller
+  * The other user should be able to move left and right controlling an individual car using the Keypad controller
   * There should be random falling obstacles that the user needs to avoid with increasing difficulty
   * There should be a score counter for each player
-  * There should be a penalty if you hit an obstacle There should be a win scenario
+  * There should be a penalty if you hit an obstacle
+  * There should be a win scenario
  
 ## Necessary Equipment
 
@@ -37,8 +39,8 @@
   * A secondary car drawing process
   * A wheel drawing function that works with our 2 car drawing functions so they actually look like cars
   * Change mball to reset the ball, increase its speed, raise and lower our hit counters and randomize the balls x position
-  * Developed a linease-feedback shift register to simulate random ball spawning positons on the x-axis
-  * Set our colors for all elements
+  * Developed a linear-feedback shift register to simulate random ball spawning positons on the x-axis
+  * Set our colors for all entities
 
 * The **_[leddec16.vhd](CarGame/leddec16.vhd)_** controls the 7 segment display and what drives each display
   * The changes made to this file revolve around seperating segments 0-3 and 4-7
