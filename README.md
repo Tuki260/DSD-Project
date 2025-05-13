@@ -96,7 +96,15 @@
 * Initialized car2_y and set it to 550, 11.
 * Initialized ball2_x_motion and ball2_y_motion. Note: Ball2_x_motion was not used in this code.
 * Initialized wall_right_on, wall_left_on, wall_fill, wall_bottom and set them all equal to '0'.
-* 
+* Set red <= car_2on or car2wheel_on so car2 will be red with red wheels.
+* Set green <= bat_on or wheel_on so car1 will be green with green wheels.
+* set blue <= not (ball_on or ball2_on or bat_on or car2_on or wall_left_on or wall_right_on or wall_fill or wall_bottom) so all of these named elements will be black.
+* Everything unnamed will be blue (background).
+
+Processes:
+
+1. [balldraw2](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L96-L114)
+
 
 ### leddec16.vhd
 
