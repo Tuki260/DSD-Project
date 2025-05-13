@@ -113,13 +113,17 @@ Processes:
 * Creates a vertical rectangular fill between these walls from pixelcol = 351 - 449.
 * Creates a horizontal rectangular floor between pixel_row 590 and 600
 3. [batdraw](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L146-L165)
-*
+* This process draws how the first car should look.
+* The difference from the original code has to do with the implementation of the wheels.
+* In this process, the location of the wheels are determined. For example, the first wheel's position is determined by wheel1_x and wheel1_y. Wheel1_x <= bat_x + 14, so 14 pixels to the right of the car. Whee1_y <= bat_y + 25, so 25 pixels above the car. Together, these make the first wheel, that when looking at it from above, is the front right tire.
+* This process is done for all 4 of the wheels.
 4. [wheeldraw](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L167-L238)
-*
+* 
 5. [car2wheeldraw](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L240-L311)
 *
 6. [car2draw](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L313-L332)
-*
+* This process draws how the second car should look.
+* car2draw involves the same logic as batdraw, but with the variables related to car2 (car2_x, car2_on, car2wheels).
 7. [mball](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L336-L469)
 *
 
