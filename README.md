@@ -143,8 +143,7 @@ Processes:
 
 ## Heirarchy of the code:
 
-![image](https://github.com/user-attachments/assets/548d6d30-a619-4a3d-8060-59adf9fed599)
-
+![image](https://github.com/user-attachments/assets/6ee56947-1568-4f7e-8e4f-86e13e523513)
 
 ## Input/Output Description
 
