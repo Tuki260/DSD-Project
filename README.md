@@ -153,8 +153,19 @@ Processes:
 
 ### Hardware:
 ![image](https://github.com/user-attachments/assets/e23a38be-de99-4721-8a1f-c4ad113ad660)
-* On the Nexys A7 board, connect the VGA port (Red) to the monitor you want to display the game on. Connect the USB port (Blue) to your computer that is running the code. Turn the power on by hitting the power switch (Purple). 
+* On the Nexys A7 board, connect the VGA port (Red) to the monitor you want to display the game on. Connect the USB port (Blue) to your computer that is running the code. Turn the power on by hitting the power switch (Purple). Connect the key pad to the side port (yellow) and make sure the gnd from the key pad is matched up with the board's gnd.
 
+### In Vivado:
+* Start a new RTL project called CarGame
+* Create six new source files: car_n_obstacles, cardrive, clk_wiz_0, clk_wiz_0_clk_wiz, leddec16, vga_sync and one constraint file: cardrive. Choose the Nexys A7-100T board and hit 'Finish.'
+* From this github, copy and paste the corresponding code into the file on vivado.
+* Once all of the files are up to date, make sure they are all saved.
+* Run sythesis
+* Run implementaiton
+* Click 'Generate Bitstream'
+* Click 'Open Hardware Manager' -> 'Open Target' -> 'Auto Connect'
+* Click 'Program Device' then  xc7a100t_0 to download cargame.bit to the board.
+* Grab someone to play with and push BTNC to start playing. 
 
 ## Gameplay Summary
 
