@@ -195,6 +195,7 @@ Jaelin:
 * Wheel Dimensions/Graphics
 * Colors
 * Debugging/Creating Alternate "Test" Codes to implement new features
+* Original Code Breakdown for Understanding
 
 Salvatore: *Needs Editing*
 
