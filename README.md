@@ -169,7 +169,7 @@ Processes:
 
 ## Gameplay Summary
 
-![Gameplay Demo](pictures/gameplay.gif)
+![Gameplay Demo](Pictures/IMG_1185-ezgif.com-optimize.gif)
 
 
 
