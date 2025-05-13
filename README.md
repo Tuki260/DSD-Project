@@ -104,21 +104,24 @@
 Processes:
 
 1. [balldraw2](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L96-L114)
-*
-
+* Very similar to the original bat_n_ball's balldraw.
+* Only difference is the change in variables such as ball2_x, ball2_y, ball2_on, v2x, and v2y.
 2. [walldraw](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L116-L141)
-*
-
+* This process creates the barrier in the middle of the screen as well as the barrier floor.
+* Creates a vertical line, wall_left_on, at pixel_col = 350.
+* Creates another vertical line, wall_right_on, at pixel_col = 450.
+* Creates a vertical rectangular fill between these walls from pixelcol = 351 - 449.
+* Creates a horizontal rectangular floor between pixel_row 590 and 600
 3. [batdraw](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L146-L165)
-
+*
 4. [wheeldraw](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L167-L238)
-
+*
 5. [car2wheeldraw](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L240-L311)
-
+*
 6. [car2draw](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L313-L332)
-
+*
 7. [mball](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L336-L469)
-
+*
 
 
 ### leddec16.vhd
