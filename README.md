@@ -183,12 +183,13 @@ Processes:
 * Grab someone to play with and push BTNC to start playing. 
 
 ## Gameplay Summary
+![Gameplay Demo](Pictures/CarMovement.gif)
+
+Upon loading up the game you will see both cars and thier respective bounds, at this point you can use BTNL and BTNR to move Car 1 left and right, And buttons 6 and 3 on the keypad to move Car 2 left and right
 
 ![Gameplay Demo](Pictures/StartGame.gif)
 
 Upon pressing BTNC the game will begin and start dropping balls at the same speed for both players, as the player dodges the obstacles the speed will increase in correspondance with each players score 
-
-![Gameplay Demo](Pictures/GameNoDisplay.gif)
 
 ![Gameplay Demo](Pictures/ConstantCrash.gif)
 
@@ -198,15 +199,24 @@ Crashing into an obstacle results in a drop in speed and score for the player an
 
 As the players progress the speed becomes capped at 25 and requires more hits to lower the speed, that way the balls dont move so fast that its impossible to reac to them
 
+![Gameplay Demo](Pictures/EndGame.gif)
+
+Finally, after some time playing, whichever player reaches a score of 70 first (46 on the display because its in hexidecimal) will be declared the winner and the game will then stop, and no more obstacles will spawn. To play again simply hit BTNC and the scores will reset back to 0 and obstacles will start to fall
 
 ## Difficulties and Itterations
 * It felt like we always had something wrong with implementing a feature, but We would say our biggest difficuties came from colors, walls, and keypad implementation.
 * For the middle wall, we wanted it to be a different color than everything else, but we often ended up with iterations of the wall being the same color as the background
 (which we would consistently mistake for the wall not showing up at all), or the bounds of the wall only working for one car and not the other.
 * For colors specifically, we honestly never got the exact logic of the coloring correct, and we ultimately went with "bugs turned to features".
+  * We believe most of our color issues came from the fact that we were using AND logic gates instead of OR logic gates, and when we ulitmately switched it to the OR gates the color worked better
 * Similar to the colors, we had an initial belief that each pin relating to the keypad was a button on the keypad individually, and tried to match the controls as such.
-We eventually figured out that the keyboard was more of a matrix, and had to change our keypad logic entirely multiple times to implement the buttons we wanted. Evem in the final project, the buttons that are used are not the buttons we wanted, but we went with the ones that worked for sake of time.
+We eventually figured out that the keyboard was more of a matrix, and had to change our keypad logic entirely multiple times to implement the buttons we wanted. Even in the final project, the buttons that are used are not the buttons we initially intended, but we went with the ones that worked for sake of time.
+  * We got this to work by setting the entirety of row 3 as active low, meaning that when a button was pushed it would be set to 0 for the duration of the push, then we just looked for when the first column turned to 0 and the second column turned to 0 and associated those with our left and right motions for car 2 
 * For an extremely long time, the obstacles would fall through the world infinitely without respawning, and we were stuck on that respawn logic for multiple days, often leaving it to polish other features of the game.
+  * We realized that there was two spots in the mball process that was controlling the ball_y motion and despite our logic being correct of the collision and deletion of the ball when it met the end of our bounds, it was immediatly being overwritten by the other code lines controlling ball_y and making it go on forever
+* We ran into issues trying to split the 7 segment display and have it show 2 values. Initially we tried to use a switch case that drove the different values to its own variable called display choice which would then be sent to DATA in the cardrive file. This never ended up working so we made DATA and DATA2 in the leddec file and drove the seperate values there
+* We were having trouble creating simulated randomness for the balls x position, we intially tried creating a counter that incremented on every clk cycle, and then we would take random bits from the middle and use that as our x position, however when the ball got faster, it began dropping in a straight line.
+  * To fix this we implemented a linear-feedback shift register that gave use a much more random output and this is what we went with in our final code 
 ## Timeline
 
 * 1st Class: Starting from the pong code, we figured out where we wanted the boundaries to split the two cars as well as created a way to have the new car on the right side of the boundary. 
