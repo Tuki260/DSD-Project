@@ -130,13 +130,20 @@ Processes:
 7. [mball](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L336-L469)
 * This process is responsible for the movement of the balls. 
 * Initialized variables for std_logic_vectors: temp, temp2 and integers: rnd_int, rnd_int2.
-* Randomizer stufff LINES 342-352 *NEEDS EDITING*
+* Created a linear-feedback shift register which will be used as our random number generator that takes the bits 9 down to 0 (first 10 bits) and shifts them over to the left, eliminating the 10th bit and replacing the final bit with the vlaue of bit 10 xor bit 8. the 11th bit never changes and is always set to 1. We then took bits 8 down to 0, casted them to unsigned integers and used to mod functions to ensure they stayed within our created player bounds and finally casted these output values to a variable rnd_int and rnd_int2.
 * Also modified from the original code, all operations that changed the speed of ball_x_motion were deleted so there is no horizontal movement, only vertical movement.
 * The general ball movement logic is that when the game is started, the ball starts to move.
 * If the ball meets the bottom wall with no collision, it will speed up by 6 when it respawns at the top. When we did this originally, the ball hitting the bottom would register multiple times. To remedy this, we used the variable hit_check as a flag to make sure the ball will only be registered to hit once and only increase the speed once.
 * If the ball hit the car, the car's speed would go down by 2.
 * This logic for the first ball was replicated for the second ball using ball2 variables with hit_cnt_2 and hit_check2.
-* Temp stuff LINES 431+ *NEEDS EDITING*
+* We created temp and temp2 that focused on the ball spawning and collision effects
+  * When the game begins, the balls will be sent to Y=10
+  * If the ball goes beyond Y=600 (bottom of the screen) the following effects occur
+    * The ball will be sent back to Y=10
+    * The x value of the ball will be randomized by setting it to the rnd_int variable created earlier with the linear-feedback shift register
+    * The respective hit counters will increment by 1
+    * If the hit counter reaches 70 the game will end
+    * If the hit counter is below 25 the speed of the ball will be set to the value of hit counter
 
 ### leddec16.vhd
 
@@ -150,6 +157,12 @@ Processes:
 ![image](https://github.com/user-attachments/assets/6ee56947-1568-4f7e-8e4f-86e13e523513)
 
 ## Input/Output Description
+
+BTNL press -> Car 1 moves left
+BTNR press -> Car 1 moves right
+BTNC press -> Game begins
+PMOD KYPD 6 press -> Car 2 moves left
+PMOD KYPD 3 press -> Car 2 moves right
 
 ## How to make this work in vivado
 
