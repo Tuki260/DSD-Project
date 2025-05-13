@@ -173,7 +173,7 @@ Processes:
 
 ![Gameplay Demo](Pictures/ConstantCrash.gif)
 
-
+![Gameplay Demo](Pictures/FullGameStart.gif)
 
 
 ## Difficulties and Itterations
