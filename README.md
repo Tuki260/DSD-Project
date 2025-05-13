@@ -175,6 +175,8 @@ Processes:
 
 ![Gameplay Demo](Pictures/StartGame.gif)
 
+![Gameplay Demo](Pictures/MidGame.gif)
+
 
 ## Difficulties and Itterations
 
