@@ -184,13 +184,19 @@ Processes:
 
 ## Gameplay Summary
 
+![Gameplay Demo](Pictures/StartGame.gif)
+
+Upon pressing BTNC the game will begin and start dropping balls at the same speed for both players, as the player dodges the obstacles the speed will increase in correspondance with each players score 
+
 ![Gameplay Demo](Pictures/GameNoDisplay.gif)
 
 ![Gameplay Demo](Pictures/ConstantCrash.gif)
 
-![Gameplay Demo](Pictures/StartGame.gif)
+Crashing into an obstacle results in a drop in speed and score for the player and thus the counter will increment slower making it harder for that individual to win
 
 ![Gameplay Demo](Pictures/MidGame.gif)
+
+As the players progress the speed becomes capped at 25 and requires more hits to lower the speed, that way the balls dont move so fast that its impossible to reac to them
 
 
 ## Difficulties and Itterations
