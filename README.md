@@ -209,12 +209,12 @@ We eventually figured out that the keyboard was more of a matrix, and had to cha
 * For an extremely long time, the obstacles would fall through the world infinitely without respawning, and we were stuck on that respawn logic for multiple days, often leaving it to polish other features of the game.
 ## Timeline
 
-1st Class: Starting from the pong code, we figured out where we wanted the boundaries to split the two cars as well as created a way to have the new car on the right side of the boundary. 
-2nd Class: We fully created and implemented the boundary that seperated the two player's cars. Additionally, we made the ball move only vertically, so eliminating the horizontal movement. Also allowing for speeding up after it hit the bottom wall. 
-3rd Class: We figured out how to implement the keypad for the second player. We also tried different methods to randomize the spawning of the ball, which we came up with a viable solution that worked.
-4th Class: We spent time on understanding how to get different colors for our cars / balls / boundaries / background. We also brainstormed ideas on how we could get the wheels to work.
-5th Class: This class was mainly spent finishing up the code for the wheels and the proper location for them. 
-Friday, May 9: We were able to finalize and polish all the mecahnics and features in our game. Additionally, we added a scoreboard to show the two players scores on the 7-segment display.    
+* 1st Class: Starting from the pong code, we figured out where we wanted the boundaries to split the two cars as well as created a way to have the new car on the right side of the boundary. 
+* 2nd Class: We fully created and implemented the boundary that seperated the two player's cars. Additionally, we made the ball move only vertically, so eliminating the horizontal movement. Also allowing for speeding up after it hit the bottom wall. 
+* 3rd Class: We figured out how to implement the keypad for the second player. We also tried different methods to randomize the spawning of the ball, which we came up with a viable solution that worked.
+* 4th Class: We spent time on understanding how to get different colors for our cars / balls / boundaries / background. We also brainstormed ideas on how we could get the wheels to work.
+* 5th Class: This class was mainly spent finishing up the code for the wheels and the proper location for them. 
+* Friday, May 9: We were able to finalize and polish all the mecahnics and features in our game. Additionally, we added a scoreboard to show the two players scores on the 7-segment display.    
 ## Contributions
 
 Note: For almost every feature / mechanic, we worked on it as a group instead of each doing each thing individually. We sorted the contributions below based on who's ideas and inputs worked the best for each fature.
