@@ -169,7 +169,8 @@ Processes:
 
 ## Gameplay Summary
 
-![Demo](IMG_1185-ezgif.com-video-to-gif-converter.gif)
+![Gameplay Demo](pictures/gameplay.gif)
+
 
 
 
