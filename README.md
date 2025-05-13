@@ -213,10 +213,16 @@ Jaelin:
 * Colors
 * Debugging/Creating Alternate "Test" Codes to implement new features
 * Original Code Breakdown for Understanding
+* Added to README
 
-Salvatore: *Needs Editing*
+Salvatore:
 
-* 
+* Linear-feedback shift register creation
+* Randomizing ball x position on spawn
+* Creating hit counters that increment based on collision and the ball hitting the floor
+* Speed and score control based off hit detection
+* Win condition
+* Added to README
 
 
 
