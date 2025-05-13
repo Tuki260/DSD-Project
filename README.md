@@ -169,7 +169,8 @@ Processes:
 
 ## Gameplay Summary
 
-* Gameplay gifs and images here
+* ![Gameplay Demo](assets/IMG_1185-ezgif.com-video-to-gif-converter.gif)
+
 
 ## Difficulties and Itterations
 
