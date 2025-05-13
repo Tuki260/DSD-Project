@@ -127,10 +127,13 @@ Processes:
 7. [mball](https://github.com/Tuki260/DSD-Project/blob/06af8537e8eea8a547f3728049de778f9989fe7e/CarGame/car_n_obstacles.vhd#L336-L469)
 * This process is responsible for the movement of the balls. 
 * Initialized variables for std_logic_vectors: temp, temp2 and integers: rnd_int, rnd_int2.
-* Randomizer stufff
+* Randomizer stufff *NEEDS EDITING*
 * Also modified from the original code, all operations that changed the speed of ball_x_motion were deleted so there is no horizontal movement, only vertical movement.
-* The general logic of this code, for both ball movements, is that when the game is started, the ball starts to move.
-* If the ball meets the bottom wall, the ball will speed up. When we did this originally, the ball hitting the bottom would register multiple times. To remedy this, we used the variable hit_check as a flag to make sure the ball will only be registered to hit once and only increase in speed once. 
+* The general ball movement logic is that when the game is started, the ball starts to move.
+* If the ball meets the bottom wall with no collision, it will speed up by 6 when it respawns at the top. When we did this originally, the ball hitting the bottom would register multiple times. To remedy this, we used the variable hit_check as a flag to make sure the ball will only be registered to hit once and only increase the speed once.
+* If the ball hit the car, the car's speed would go down by 2.
+* This logic for the first ball was replicated for the second ball using ball2 variables with hit_cnt_2 and hit_check2.
+* Temp stuff *NEEDS EDITING*
 
 
 ### leddec16.vhd
