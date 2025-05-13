@@ -205,7 +205,7 @@ As the players progress the speed becomes capped at 25 and requires more hits to
 (which we would consistently mistake for the wall not showing up at all), or the bounds of the wall only working for one car and not the other.
 * For colors specifically, we honestly never got the exact logic of the coloring correct, and we ultimately went with "bugs turned to features".
 * Similar to the colors, we had an initial belief that each pin relating to the keypad was a button on the keypad individually, and tried to match the controls as such.
-We eventually figured out that the keyboard was more of a matrix, and had to change our keypad logic entirely multiple times to implement the buttons we wanted.
+We eventually figured out that the keyboard was more of a matrix, and had to change our keypad logic entirely multiple times to implement the buttons we wanted. Evem in the final project, the buttons that are used are not the buttons we wanted, but we went with the ones that worked for sake of time.
 * For an extremely long time, the obstacles would fall through the world infinitely without respawning, and we were stuck on that respawn logic for multiple days, often leaving it to polish other features of the game.
 ## Contributions
 
