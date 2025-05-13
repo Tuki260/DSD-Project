@@ -171,6 +171,8 @@ Processes:
 
 ## Gameplay Summary
 
+![Gameplay Demo](Pictures/GameNoDisplay.gif)
+
 ![Gameplay Demo](Pictures/ConstantCrash.gif)
 
 ![Gameplay Demo](Pictures/StartGame.gif)
