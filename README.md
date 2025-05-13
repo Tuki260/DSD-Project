@@ -200,7 +200,13 @@ As the players progress the speed becomes capped at 25 and requires more hits to
 
 
 ## Difficulties and Itterations
-
+* It felt like we always had something wrong with implementing a feature, but We would say our biggest difficuties came from colors, walls, and keypad implementation.
+* For the middle wall, we wanted it to be a different color than everything else, but we often ended up with iterations of the wall being the same color as the background
+(which we would consistently mistake for the wall not showing up at all), or the bounds of the wall only working for one car and not the other.
+* For colors specifically, we honestly never got the exact logic of the coloring correct, and we ultimately went with "bugs turned to features".
+* Similar to the colors, we had an initial belief that each pin relating to the keypad was a button on the keypad individually, and tried to match the controls as such.
+We eventually figured out that the keyboard was more of a matrix, and had to change our keypad logic entirely multiple times to implement the buttons we wanted.
+* For an extremely long time, the obstacles would fall through the world infinitely without respawning, and we were stuck on that respawn logic for multiple days, often leaving it to polish other features of the game.
 ## Contributions
 
 Note: For almost every feature / mechanic, we worked on it as a group instead of each doing each thing individually. We sorted the contributions below based on who's ideas and inputs worked the best for each fature.
